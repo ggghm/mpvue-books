@@ -8,15 +8,34 @@ const app = new Vue(App)
 app.$mount()
 
 export default {
-  // 这个字段走 app.json
   config: {
-    // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
-    pages: ['pages/logs/main', '^pages/index/main'],
+    pages: ['^pages/eat/main'],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#70c760',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: '#fff'
+    },
+    tabBar: {
+      selectedColor: '#70c760',
+      list: [
+        {
+          text: '吃 啥',
+          pagePath: 'pages/eat/main',
+          iconPath: 'static/img/5.png',
+          selectedIconPath: 'static/img/6.png'
+        }, {
+          text: '住 哪',
+          pagePath: 'pages/sleep/main',
+          iconPath: 'static/img/11.png',
+          selectedIconPath: 'static/img/12.png'
+        }, {
+          text: '玩什么',
+          pagePath: 'pages/fun/main',
+          iconPath: 'static/img/13.png',
+          selectedIconPath: 'static/img/14.png'
+        }
+      ]
     }
   }
 }
