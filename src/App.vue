@@ -1,10 +1,13 @@
 <script>
-// import config from './config'
+import config from './config'
 export default {
   created () {
-    // wx.request({
-    //   url: config.host + '/weapp/demo'
-    // })
+    wx.request({
+      url: config.host + '/weapp/demo',
+      success: function (res) {
+        console.log(res)
+      }
+    })
     console.log('启动')
   }
 }
