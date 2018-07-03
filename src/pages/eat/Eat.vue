@@ -11,6 +11,8 @@
     <div class="nickname" v-if="isInssued">
       {{nickName}}
     </div>
+    <button class="btn" @click="scanBook">扫描图书</button>
+    <YearProgress></YearProgress>
   </div>
 </template>
 
@@ -20,6 +22,7 @@
 import {showSuccess} from '../../util.js'
 import qcloud from 'wafer2-client-sdk'
 import config from '../../config'
+import YearProgress from '@/components/YearProgress'
 export default {
   data () {
     return {
@@ -27,6 +30,9 @@ export default {
       imgUrl: '../../../static/img/timg.jpg',
       nickName: ''
     }
+  },
+  components: {
+    YearProgress
   },
   methods: {
     doLogin: function () {
@@ -56,12 +62,20 @@ export default {
         this.nickName = user.nickName
         this.isInssued = true
       }
+    },
+    // 允许从相机和相册扫码
+    scanBook () {
+      wx.scanCode({
+        success: (res) => {
+          console.log(res)
+        }
+      })
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .avatar{
   display: block;
   width: 200rpx;
@@ -85,5 +99,9 @@ export default {
   margin: 0 auto;
   text-align: center;
   margin-top: 20rpx;
+}
+.btn{
+  width: 80%;
+  margin-top: 40rpx;
 }
 </style>
