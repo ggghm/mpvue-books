@@ -8,7 +8,7 @@ const CONF = {
     qcloudSecretKey: '60vjNo24wb3MdjcIm37yc3HJ8nGXbS6X',
     wxMessageToken: 'weixinmsgtoken',
     networkTimeout: 30000,
-    
+
     port: '5757',
     rootPathname: '',
 
@@ -31,7 +31,7 @@ const CONF = {
         port: 3306,
         user: 'root',
         db: 'cAuth',
-        pass: 'wx66525979d3baf553',
+        pass: '050705',
         char: 'utf8mb4'
     },
 
@@ -48,8 +48,7 @@ const CONF = {
     },
 
     // 微信登录态有效期
-    wxLoginExpires: 7200,
-    wxMessageToken: 'abcdefgh'
+    wxLoginExpires: 7200
 }
 
 module.exports = CONF

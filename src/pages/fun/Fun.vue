@@ -1,6 +1,6 @@
 <template>
   <div>
-    玩点啥
+  	玩点啥
   </div>
 </template>
 

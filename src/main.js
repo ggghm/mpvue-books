@@ -9,6 +9,7 @@ app.$mount()
 
 export default {
   config: {
+    // ^后面代表的是首页
     pages: ['^pages/eat/main'],
     window: {
       backgroundTextStyle: 'light',
