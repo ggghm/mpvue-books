@@ -7,9 +7,7 @@
       open-type="getUserInfo"
       lang="zh_CN"
       @getuserinfo="doLogin"
-    >
-      登录
-    </button>
+    >登录</button>
     <div class="nickname" v-if="isInssued">
       {{nickName}}
     </div>
