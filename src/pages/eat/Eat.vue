@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img class="avatar" :src="imgUrl" alt="头像">
+    <img class="avatar" :src="userInfo.avatarUrl" alt="头像">
     <button
       class="login"
       v-if="!isInssued"
@@ -9,9 +9,10 @@
       @getuserinfo="doLogin"
     >登录</button>
     <div class="nickname" v-if="isInssued">
-      {{nickName}}
+      {{userInfo.nickName}}
     </div>
-    <button class="btn" @click="scanBook">扫描图书</button>
+    <!-- 只有登陆成功后获得openId才能使用扫码功能 -->
+    <button class="btn" @click="scanBook" v-if="userInfo.openId">扫描图书</button>
     <YearProgress></YearProgress>
   </div>
 </template>
@@ -27,8 +28,10 @@ export default {
   data () {
     return {
       isInssued: false,
-      imgUrl: '../../../static/img/timg.jpg',
-      nickName: ''
+      userInfo: {
+        avatarUrl: '../../../static/img/timg.jpg',
+        nickName: ''
+      }
     }
   },
   components: {
@@ -36,30 +39,33 @@ export default {
   },
   methods: {
     doLogin: function () {
-      let vm = this;
+      let vm = this
       // 获取个人信息之前，先看本地缓存有没有个人信息
       let user = wx.getStorageSync('userInfo')
       // 缓存没有个人信息
-      if(!user) {
+      if (!user) {
         // 这一步应该是异步操作
         qcloud.setLoginUrl(config.loginUrl)
         qcloud.login({
           success: function (userInfo) {
             // 登录成功后弹出提示信息
             showSuccess('登录成功')
-            vm.imgUrl = userInfo.avatarUrl
-            vm.nickName = userInfo.nickName
+            console.log(userInfo)
+            // vm.userInfor.imgUrl = userInfo.avatarUrl
+            // vm.userInfor.nickName = userInfo.nickName
+            vm.userInfo = userInfo
             vm.isInssued = true
             // 将个人信息以同步方式存入缓存
             wx.setStorageSync('userInfo', userInfo)
           },
           fail: function (err) {
             console.log('登录失败', err)
-          },
+          }
         })
       } else {
-        this.imgUrl = user.avatarUrl
-        this.nickName = user.nickName
+        // this.userInfor.imgUrl = user.avatarUrl
+        // this.userInfor.nickName = user.nickName
+        this.userInfo = user
         this.isInssued = true
       }
     },

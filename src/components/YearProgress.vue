@@ -12,34 +12,34 @@
 <script>
 export default {
   methods: {
-    isLeapYear() {
-      const year  = new Date().getFullYear()
-      if(year%400===0) {
+    isLeapYear () {
+      const year = new Date().getFullYear()
+      if (year % 400 === 0) {
         return true
-      } else if(year%4===0 && year%100!==0) {
+      } else if (year % 4 === 0 && year % 100 !== 0) {
         return true
       } else {
         return false
       }
     },
-    getDayOfYear() {
+    getDayOfYear () {
       return this.isLeapYear() ? 366 : 365
     }
   },
   computed: {
-    year() {
+    year () {
       return new Date().getFullYear()
     },
-    days() {
+    days () {
       let start = new Date()
       start.setMonth(0)
       start.setDate(1)
       // start是今年第一天
-      let offset = new Date().getTime()-start.getTime()
-      return parseInt(offset/1000/3600/24)+1
+      let offset = new Date().getTime() - start.getTime()
+      return parseInt(offset / 1000 / 3600 / 24) + 1
     },
-    persent() {
-      return (this.days*100/this.getDayOfYear()).toFixed(1)
+    persent () {
+      return (this.days * 100 / this.getDayOfYear()).toFixed(1)
     }
   }
 }

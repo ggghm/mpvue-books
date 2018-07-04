@@ -49,6 +49,16 @@ module.exports = {
   },
   module: {
     rules: [
+      // 开发时要一直修正太烦了，最后npm run lint来修复就好了
+      // {
+      //   test: /\.(js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   enforce: 'pre',
+      //   include: [resolve('src'), resolve('test')],
+      //   options: {
+      //     formatter: require('eslint-friendly-formatter')
+      //   }
+      // },
       {
         test: /\.vue$/,
         loader: 'mpvue-loader',
