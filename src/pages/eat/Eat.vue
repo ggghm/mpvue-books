@@ -20,7 +20,7 @@
 <script>
 // 使用了wafer2的sdk来读取用户的个人信息，与之前版本不一样的是现在要通过
 // button的点击来触发获取用户信息open-type="getUserInfo"
-import {showSuccess} from '../../util.js'
+import {showSuccess, post} from '../../util.js'
 import qcloud from 'wafer2-client-sdk'
 import config from '../../config'
 import YearProgress from '@/components/YearProgress'
@@ -69,14 +69,27 @@ export default {
         this.isInssued = true
       }
     },
+    async addBook (isbn) {
+      const res = await post('/weapp/addbook', {
+        isbn,
+        openid: this.userInfo.openId
+      })
+      if(res.code===0 && res.data.tittle) {
+        showSuccess(`${res.data.tittle}添加成功`)
+      }
+    },
     // 允许从相机和相册扫码
     scanBook () {
       wx.scanCode({
         success: (res) => {
-          console.log(res)
+          console.log(res.result)
+          if(res.result) {
+            this.addBook(res.result)
+          }
         }
       })
-    }
+    },
+
   }
 }
 </script>
