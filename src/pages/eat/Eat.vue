@@ -20,7 +20,7 @@
 <script>
 // 使用了wafer2的sdk来读取用户的个人信息，与之前版本不一样的是现在要通过
 // button的点击来触发获取用户信息open-type="getUserInfo"
-import {showSuccess, post} from '../../util.js'
+import {showSuccess, post, showModal} from '../../util.js'
 import qcloud from 'wafer2-client-sdk'
 import config from '../../config'
 import YearProgress from '@/components/YearProgress'
@@ -70,13 +70,15 @@ export default {
       }
     },
     async addBook (isbn) {
+      // 这里完整的请求流程应该是：发起一个异步post请求，这里发起/addbook请求，
+      // 路由中会将/addbook转发给 controllers.addbook，
+      // 拿到ctx中返回的数据
       const res = await post('/weapp/addbook', {
         isbn,
         openid: this.userInfo.openId
       })
-      if(res.code===0 && res.data.tittle) {
-        showSuccess(`${res.data.tittle}添加成功`)
-      }
+      console.log('123',res)
+      showModal('添加成功',`${res.title}添加成功`)
     },
     // 允许从相机和相册扫码
     scanBook () {

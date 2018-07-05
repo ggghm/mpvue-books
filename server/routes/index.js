@@ -34,6 +34,6 @@ router.get('/message', controllers.message.get)
 router.post('/message', controllers.message.post)
 
 router.get('/demo', controllers.demo)
-
+// 意思是把'/addbook'这个路由请求转发到controllers.addbook
 router.post('/addbook', controllers.addbook)
 module.exports = router
