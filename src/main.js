@@ -10,7 +10,7 @@ app.$mount()
 export default {
   config: {
     // ^后面代表的是首页
-    pages: ['^pages/eat/main'],
+    pages: ['^pages/book/main'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#70c760',
@@ -21,18 +21,18 @@ export default {
       selectedColor: '#70c760',
       list: [
         {
-          text: '吃 啥',
-          pagePath: 'pages/eat/main',
+          text: '图 书',
+          pagePath: 'pages/book/main',
           iconPath: 'static/img/5.png',
           selectedIconPath: 'static/img/6.png'
         }, {
-          text: '住 哪',
-          pagePath: 'pages/sleep/main',
+          text: '评 论',
+          pagePath: 'pages/comment/main',
           iconPath: 'static/img/11.png',
           selectedIconPath: 'static/img/12.png'
         }, {
-          text: '玩什么',
-          pagePath: 'pages/fun/main',
+          text: '我',
+          pagePath: 'pages/me/main',
           iconPath: 'static/img/13.png',
           selectedIconPath: 'static/img/14.png'
         }

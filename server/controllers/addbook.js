@@ -13,7 +13,7 @@ module.exports = async (ctx) => {
     // 先验证图书是否已经添加
     const findRes = await mysql('books').select().where('isbn', isbn)
     if(findRes.length) {
-      ctx.state = {
+      ctx.state.data = {
         code: -1,
         data: {
           msg: '图书已存在'
@@ -32,6 +32,7 @@ module.exports = async (ctx) => {
     // console.log(bookinfo)
     const author = bookinfo.author.join(',') //使用数组的join方法，将数组拼接为字符串
     try {
+      // 向 mysql 中录入获取到的图书信息
       await mysql('books').insert({
         isbn, openid, rate, title, image, alt, publisher, summary, price, tags, author
       })

@@ -1,4 +1,4 @@
-// 工具函数库，将所有工具性质的模块都封装到这里，用户端调用的工具库
+// 工具函数库，将所有公用的工具性质的模块都封装到这里，用户端调用的工具库
 
 import config from './config'
 
@@ -16,6 +16,7 @@ function request (url, method, data) {
     wx.request({
       data,
       method,
+      // 对要访问的子目录进行拼接
       url: config.host + url,
       success: function (res) {
         if (res.data.code === 0) {

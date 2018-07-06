@@ -35,6 +35,8 @@ router.post('/message', controllers.message.post)
 
 router.get('/demo', controllers.demo)
 // 意思是把'/addbook'这个路由请求转发到controllers.addbook
+// 添加图书控件，作用是把获取到的图书信息录入到mysql中
 router.post('/addbook', controllers.addbook)
 
+router.get('/booklist', controllers.booklist)
 module.exports = router
