@@ -18,6 +18,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="stylus">
+.text-footer
+  text-align: center
+  font-size: 25rpx
+  padding: 10rpx
+.text-primary
+  color:#EA5149
 </style>

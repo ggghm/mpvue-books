@@ -4,20 +4,42 @@
       <img :src="book.image" class="image" mode="aspectFit">
     </div>
     <div class="detail">
-      <div class="left">
-        {{book.title}}
+      <div class="row text-primary">
+        <div class="left">
+          {{book.title}}
+        </div>
+        <div class="right">
+          {{book.rate}} <Rate :value="book.rate"></Rate>
+        </div>
       </div>
-      <div class="right">
-        {{book.rate}}
+      <div class="row">
+        <div class="left">
+          {{book.author}}
+        </div>
+        <div class="right">
+          浏览量
+        </div>
+      </div>
+      <div class="row">
+        <div class="left">
+          {{book.publisher}}
+        </div>
+        <div class="right">
+          {{book.nickName}}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Rate from '@/components/Rate'
 export default {
   props: {
     book: Object
+  },
+  components: {
+    Rate
   }
 }
 </script>
@@ -39,11 +61,14 @@ export default {
       justify-content: center
       align-items: center
   .detail
-    display: flex
-    justify-content: space-between
-    width: 100%
-    padding: 20rpx
-    font-size: 30rpx
-    .left
-      max-width: 60%
+    width:100%
+    padding: 10rpx 20rpx
+    .row
+      display: flex
+      justify-content: space-between
+      width: 100%
+      padding: 10rpx
+      font-size: 25rpx
+      .left
+        max-width: 70%
 </style>

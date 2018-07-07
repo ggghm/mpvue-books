@@ -65,6 +65,7 @@ export default {
       } else {
         // this.userInfor.imgUrl = user.avatarUrl
         // this.userInfor.nickName = user.nickName
+        console.log(user)
         this.userInfo = user
         this.isInssued = true
       }
@@ -75,10 +76,15 @@ export default {
       // 拿到ctx中返回的数据
       const res = await post('/weapp/addbook', {
         isbn,
-        openid: this.userInfo.openId
+        openid: this.userInfo.openId,
+        nickName: this.userInfo.nickName
       })
-      console.log('123',res)
-      showModal('添加成功',`${res.title}添加成功`)
+      // console.log('123',res)
+      if(res.code===-1){
+        showModal('添加失败',`${res.msg}`)
+      } else {
+        showModal('添加成功',`${res.title}添加成功`)
+      }
     },
     // 允许从相机和相册扫码
     scanBook () {

@@ -8,20 +8,18 @@ const { mysql } = require('../qcloud')
 
 module.exports = async (ctx) => {
   // 请求发起后，传入的参数都在ctx.request.body中
-  const {isbn, openid} = ctx.request.body
-  if (isbn && openid) {
+  const {isbn, openid, nickName} = ctx.request.body
+  if (isbn && openid && nickName) {
     // 先验证图书是否已经添加
     const findRes = await mysql('books').select().where('isbn', isbn)
     if(findRes.length) {
       ctx.state.data = {
         code: -1,
-        data: {
-          msg: '图书已存在'
-        }
+        msg: '图书已存在'
       }
       return
     }
-
+    // 从豆瓣网上抓取数据并存入mysql
     let url = 'https://api.douban.com/v2/book/isbn/'+isbn
     const bookinfo = await getJSON(url)
     const rate = bookinfo.rating.average
@@ -34,7 +32,7 @@ module.exports = async (ctx) => {
     try {
       // 向 mysql 中录入获取到的图书信息
       await mysql('books').insert({
-        isbn, openid, rate, title, image, alt, publisher, summary, price, tags, author
+        isbn, openid, nickName, rate, title, image, alt, publisher, summary, price, tags, author
       })
       // 现在先理解成下面这一句就是简单向外返回参数
       ctx.state.data = {
