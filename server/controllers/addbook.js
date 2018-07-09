@@ -7,7 +7,7 @@ const https = require('https')
 const { mysql } = require('../qcloud')
 
 module.exports = async (ctx) => {
-  // 请求发起后，传入的参数都在ctx.request.body中
+  // 请求发起后，wx.request传入的参数data都在ctx.request.body中
   const {isbn, openid, nickName} = ctx.request.body
   if (isbn && openid && nickName) {
     // 先验证图书是否已经添加

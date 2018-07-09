@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TopSwiper :top="top"></TopSwiper>
     <Card v-for="book in books" :key="book.id" :book='book'></Card>
     <p class="text-footer" v-if="hasMore">没有更多数据</p>
     <!-- <Card></Card> -->
@@ -9,16 +10,19 @@
 <script>
 import {get} from '@/util.js'
 import Card from '@/components/Card'
+import TopSwiper from '@/components/TopSwiper'
 export default {
   data () {
     return {
       books: [],
       page: 0,   // 用来实现分页加载
-      hasMore: false
+      hasMore: false,
+      top: []
     }
   },
   components: {
-    Card
+    Card,
+    TopSwiper
   },
   methods: {
     // init 表示初始永远显示第一页，下拉刷新和初始化
@@ -28,7 +32,7 @@ export default {
         this.hasMore = false
       }
       wx.showNavigationBarLoading()  // 顶部会显示一个旋转的加载符号
-      const books = await get('/weapp/booklist',{page: this.page})
+      const books = await get('/weapp/booklist',{page: this.page}) //拿到的是book的全部信息
       // console.log('books',books)
       // this.books = books
       // 如果本次从数据库中拿到的数据不足十条，且不是第一页，显示没有更多数据
@@ -48,10 +52,18 @@ export default {
       }
 
       wx.hideNavigationBarLoading()
+    },
+    // 获取最大阅读量的书籍
+    async getTopRead () {
+      const top = await get('/weapp/topRead')
+      this.top = top
+      console.log('top',this.top)
     }
+
   },
   mounted() {
     this.getList(true)
+    this.getTopRead()  // 获取最多阅读书籍
   },
   // 下拉刷新
   onPullDownRefresh(){
