@@ -32,7 +32,7 @@ export default {
         this.hasMore = false
       }
       wx.showNavigationBarLoading()  // 顶部会显示一个旋转的加载符号
-      const books = await get('/weapp/booklist',{page: this.page}) //拿到的是book的全部信息
+      const books = await get('/weapp/booklist', {page: this.page}) //拿到的是book的全部信息
       // console.log('books',books)
       // this.books = books
       // 如果本次从数据库中拿到的数据不足十条，且不是第一页，显示没有更多数据
