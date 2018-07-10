@@ -36,7 +36,7 @@ export default {
       // console.log('books',books)
       // this.books = books
       // 如果本次从数据库中拿到的数据不足十条，且不是第一页，显示没有更多数据
-      if(books.length<5 && this.page>0) {
+      if(books.length < 5 && this.page > 0) {
         this.hasMore = true
       }
       // 如果是首次加载，两种情况：

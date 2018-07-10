@@ -22,7 +22,7 @@ function request (url, method, data) {
         if (res.data.code === 0) {
           // wx.request 返回的数据形式就是这样res.data.data
           // 这个地方返回的数据是从ctx，也就是koa中拿到的
-          console.log('456', res.data.data)
+          // console.log('456', res.data.data)
           resolve(res.data.data)
         } else {
           showModal('失败', res.data.data.msg)

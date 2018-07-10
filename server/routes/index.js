@@ -43,4 +43,8 @@ router.get('/booklist', controllers.booklist)
 router.get('/bookdetail', controllers.bookdetail)
 
 router.get('/topRead', controllers.topRead)
+
+router.post('/addComment', controllers.addComment)
+
+router.get('/commentlist', controllers.commentlist)
 module.exports = router
