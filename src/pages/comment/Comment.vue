@@ -5,19 +5,23 @@
 </template>
 
 <script>
-import {get} from '@/utils'
+import {get} from '@/util'
 import Commentlist from '@/components/Commentlist'
 export default {
   data () {
     return {
       comments: [],
-      userinfo: []
+      userinfo: {}
     }
   },
   components: {
     Commentlist
   },
   methods: {
+    init () {
+      wx.showNavigationBarLoading()
+      this.getComments()
+    },
     async getComments() {
       const comments = await get('/weapp/commentuser', {
         openid: this.userinfo.openId
@@ -26,9 +30,10 @@ export default {
   },
   onShow () {
     if (!this.userinfo.openId) {
-      const userinfo = wx.getStorageSync()
+      const userinfo = wx.getStorageSync('userinfo')
       if (userinfo) {
         thsi.userinfo = userinfo
+        this.init()
       }
     }
 
