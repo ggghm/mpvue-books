@@ -33,8 +33,8 @@ export default {
   computed: {
     imageArr () {
       const res = this.top
-      console.log(res.slice(0,3), res.slice(3,6), res.slice(6));
-      return [res.slice(0,3), res.slice(3,6), res.slice(6)]
+      console.log(res.slice(0, 3), res.slice(3, 6), res.slice(6))
+      return [res.slice(0, 3), res.slice(3, 6), res.slice(6)]
     }
   },
   methods: {

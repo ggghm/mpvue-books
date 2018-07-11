@@ -10,9 +10,9 @@
 <script>
 export default{
   props: ['value'],
-  computed:{
+  computed: {
     style () {
-      return `width:${this.value/2-0.989}em`
+      return `width:${this.value / 2 - 0.989}em`
     }
   }
 }

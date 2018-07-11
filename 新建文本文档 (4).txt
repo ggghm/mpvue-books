@@ -27,3 +27,20 @@ create table comments(
   phone varchar(50),
   location varchar(50)
 )
+
+
+bookid:"16",
+comment:"伟大领袖毛主席！",
+id:1
+location:"成都市"
+openid:"o_HCo5ZUBSjlWj9k_JUxrF7CMDgs"
+phone:"iPhone 6"
+user_info:
+avatarUrl:"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIRaialeuyAvMULocQFMGgZxLq1g36oQ2tA3kXq9syTe6EExWicWiavzxPUGaCnebl1uMQKHLgy6wX0Q/132"
+city:""
+country:"China"
+gender:1
+language:"zh_CN"
+nickName:"Leon"
+openId:"o_HCo5ZUBSjlWj9k_JUxrF7CMDgs"
+province:"Sichuan"

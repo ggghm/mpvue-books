@@ -48,8 +48,8 @@ export default {
     Rate
   },
   computed: {
-    detailUrl() {
-      return `/pages/detail/main?id=${this.book.id}`  // ?带代表传递的参数
+    detailUrl () {
+      return `/pages/detail/main?id=${this.book.id}` // ?带代表传递的参数
     }
   },
   methods: {

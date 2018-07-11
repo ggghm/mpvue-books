@@ -80,10 +80,10 @@ export default {
         nickName: this.userInfo.nickName
       })
       // console.log('123',res)
-      if(res.code===-1){
-        showModal('添加失败',`${res.msg}`)
+      if (res.code === -1) {
+        showModal('添加失败', `${res.msg}`)
       } else {
-        showModal('添加成功',`${res.title}添加成功`)
+        showModal('添加成功', `${res.title}添加成功`)
       }
     },
     // 允许从相机和相册扫码
@@ -91,12 +91,12 @@ export default {
       wx.scanCode({
         success: (res) => {
           console.log(res.result)
-          if(res.result) {
+          if (res.result) {
             this.addBook(res.result)
           }
         }
       })
-    },
+    }
 
   }
 }

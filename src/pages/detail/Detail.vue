@@ -2,8 +2,9 @@
   <div>
     <!-- 上方的图书卡片 -->
     <BookInfo :bookinfo="bookinfo"></BookInfo>
-    <!-- 下面的评论区域加功能区 -->
-    <div class="comment">
+    <Commentlist :comments="commentlist" v-if="commentlist.length"></Commentlist>
+    <!-- 下面是添加评论区域加功能区 -->
+    <div class="comment" v-if="showAddComment">
       <textarea
         v-model="comment"
         class="textarea"
@@ -27,13 +28,19 @@
       <button class="commentBtn" @click="addComment">
         评论
       </button>
+      <!-- 下面这个读不出来，是什么坑？？异步操作的问题，这种情况下要使用子组件才行
+      ，父组件把值获取到后，再传给子组件，这样是没问题的-->
+      <!-- <img :src="commentInfo[0].user_info.avatarUrl" alt=""> -->
     </div>
+    <div v-if="!showAddComment" class="text-footer">未登录或已经评论过</div>
+    <button open-type="share" class="shareButton">转发给好友</button>
   </div>
 </template>
 
 <script>
 import {get, post, showModal} from '@/util'
 import BookInfo from '@/components/BookInfo'
+import Commentlist from '@/components/Commentlist'
 export default {
   data () {
     return {
@@ -43,15 +50,17 @@ export default {
       location: '',
       phone: '',
       map: '',
-      userinfo: {}
+      userinfo: {}, // 使用者评论使用
+      commentlist: []
     }
   },
   components: {
-    BookInfo
+    BookInfo,
+    Commentlist
   },
   methods: {
     // 进入页面后，获取图书详细信息，同时将数据库中的count字段加一
-    async getDetail() {
+    async getDetail () {
       const info = await get('/weapp/bookdetail', {id: this.bookid})
       wx.setNavigationBarTitle({
         title: info.title
@@ -60,7 +69,7 @@ export default {
     },
     getGeo (e) {
       let url = 'https://apis.map.qq.com/ws/geocoder/v1/'
-      if(e.target.value) {   // 如果选中
+      if (e.target.value) { // 如果选中
         wx.getLocation({
           success: res => {
             wx.request({
@@ -72,7 +81,7 @@ export default {
               },
               success: res => {
                 console.log(res)
-                if(res.data.status===0) {
+                if (res.data.status === 0) {
                   this.location = res.data.result.address_component.city
                 } else {
                   this.location = '未知地点'
@@ -88,7 +97,7 @@ export default {
       }
     },
     getPhone (e) {
-      if(e.target.value) {   // 如果选中
+      if (e.target.value) { // 如果选中
         const phoneInfo = wx.getSystemInfoSync()
         // console.log(phoneInfo)
         this.phone = phoneInfo.model
@@ -97,10 +106,10 @@ export default {
       }
     },
     getMap (e) {
-      if(e.target.value) {
+      if (e.target.value) {
         wx.getLocation({
           success: res => {
-            wx.openLocation ({
+            wx.openLocation({
               latitude: res.latitude,
               longitude: res.longitude
             })
@@ -126,6 +135,7 @@ export default {
       try {
         await post('/weapp/addcomment', data)
         this.comment = ''
+        this.getComments()
       } catch (e) {
         showModal('失败', e.msg)
       }
@@ -133,24 +143,44 @@ export default {
     // 异步获取图书评论列表
     async getComments () {
       // 注意啊！！！这里要加一个 await 这个promise才会resolve啊，不然就是个promise
-      const commentInfo = get('/weapp/commentlist', {bookid: this.bookid})
-      console.log('已经评论的:',commentInfo)
+      const comments = await get('/weapp/commentlist', {bookid: this.bookid})
+      this.commentlist = comments.list
+      console.log('已经评论的:', this.commentlist)
     }
   },
-    mounted() {
-      // 如何获取小程序在 page onLoad 时候传递的 options
-      // 在所有页面的组件内可以通过 this.$root.$mp.query 进行获取。
-      // Card.vue 中在 a 标签中的跳转链接传入了参数 book.id，这里页面一渲染就获取到它
-      this.bookid = this.$root.$mp.query.id
-      this.getDetail()
-      this.getComments()   // 根据图书的id获取当前图书的评论列表
-      // 从缓存中获取oprnid
-      const userinfo = wx.getStorageSync('userInfo')
-      if(userinfo) {
-        this.userinfo = userinfo
+  computed: {
+    // 是否还可以添加评论，没有登录或者已经添加评论都不能评论
+    showAddComment () {
+      // 是否登录
+      if (this.userinfo.openId) {
+        // 登录后是否已经添加评论
+        const flag = this.commentlist.every(item => {
+          return item.openId !== this.userinfo.openId
+        })
+        if (flag) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return false
       }
     }
+  },
+  mounted () {
+    // 如何获取小程序在 page onLoad 时候传递的 options
+    // 在所有页面的组件内可以通过 this.$root.$mp.query 进行获取。
+    // Card.vue 中在 a 标签中的跳转链接传入了参数 book.id，这里页面一渲染就获取到它
+    this.bookid = this.$root.$mp.query.id
+    this.getDetail()
+    this.getComments() // 根据图书的id获取当前图书的评论列表
+    // 从缓存中获取oprnid
+    const userinfo = wx.getStorageSync('userInfo')
+    if (userinfo) {
+      this.userinfo = userinfo
+    }
   }
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -162,6 +192,9 @@ export default {
       height: 200rpx
       background: #eeeeee
     .commentBtn
+      color: #ffffff
+      background: #EA5A49
+  .shareButton
       color: #ffffff
       background: #EA5A49
 </style>
