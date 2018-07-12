@@ -1,9 +1,12 @@
 <template>
   <div class="comment-list">
-    <div>评论</div>
+    <div>
+      评论
+    </div>
     <div class="comment"
         v-for='comment in comments'
         :key='comment.id'
+        @click='handleClick(comment.bookid)'
         >
       <div class="user">
         <div class="inline">
@@ -31,7 +34,16 @@
 
 <script>
 export default {
-  props: ['comments']
+  props: ['comments', 'type'],
+  methods: {
+    handleClick (bookid) {
+      if(this.type === 'userComment') {
+        wx.navigateTo({
+          url: `/pages/detail/main?id=${bookid}`
+        })
+      }
+    }
+  }
 }
 </script>
 

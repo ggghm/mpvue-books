@@ -33,7 +33,9 @@
       <!-- <img :src="commentInfo[0].user_info.avatarUrl" alt=""> -->
     </div>
     <div v-if="!showAddComment" class="text-footer">未登录或已经评论过</div>
-    <button open-type="share" class="shareButton">转发给好友</button>
+    <!-- <button open-type="share" class="shareButton">转发给好友</button> -->
+    <button open-type='share' class="shareButton" @click="handleShare">转发给好友</button>
+    <button class="shareButton" @click="backToBooklist">回到主页</button>
   </div>
 </template>
 
@@ -146,7 +148,23 @@ export default {
       const comments = await get('/weapp/commentlist', {bookid: this.bookid})
       this.commentlist = comments.list
       console.log('已经评论的:', this.commentlist)
+    },
+    backToBooklist () {
+      wx.switchTab({
+        url: '/pages/book/main'
+      })
     }
+  },
+  // page中的钩子函数
+  onShareAppMessage (res) {
+      if (res.from === 'button') {
+        // 来自页面内转发按钮
+        console.log(res.target)
+      }
+      return {
+        title: '自定义转发标题'
+        // path: '/page/detail/main'
+      }
   },
   computed: {
     // 是否还可以添加评论，没有登录或者已经添加评论都不能评论
@@ -171,7 +189,7 @@ export default {
     // 如何获取小程序在 page onLoad 时候传递的 options
     // 在所有页面的组件内可以通过 this.$root.$mp.query 进行获取。
     // Card.vue 中在 a 标签中的跳转链接传入了参数 book.id，这里页面一渲染就获取到它
-    this.bookid = this.$root.$mp.query.id
+    this.bookid = this.$root.$mp.query.id  //页面一开始就会解析访问的是哪一本图书，根据bookid
     this.getDetail()
     this.getComments() // 根据图书的id获取当前图书的评论列表
     // 从缓存中获取oprnid
@@ -179,6 +197,9 @@ export default {
     if (userinfo) {
       this.userinfo = userinfo
     }
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   }
 }
 </script>

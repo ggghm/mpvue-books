@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-  	<Commentlist :comments="commentlist"></Commentlist>
+  	<Commentlist
+      type="userComment"
+      :comments="commentlist"
+      v-if="commentlist.length"
+      ></Commentlist>
   </div>
 </template>
 
@@ -11,7 +15,8 @@ export default {
   data () {
     return {
       comments: [],
-      userinfo: {}
+      userinfo: {},
+      commentlist: []
     }
   },
   components: {
@@ -23,22 +28,21 @@ export default {
       this.getComments()
     },
     async getComments() {
-      const comments = await get('/weapp/commentuser', {
+      const comments = await get('/weapp/commentlist', {
         openid: this.userinfo.openId
       })
+      this.commentlist = comments.list
     }
   },
   onShow () {
     if (!this.userinfo.openId) {
-      const userinfo = wx.getStorageSync('userinfo')
+      const userinfo = wx.getStorageSync('userInfo')
       if (userinfo) {
-        thsi.userinfo = userinfo
+        this.userinfo = userinfo
         this.init()
       }
     }
-
   }
-
 }
 </script>
 

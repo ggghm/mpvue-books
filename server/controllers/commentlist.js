@@ -1,11 +1,18 @@
 const {mysql} = require('../qcloud')
 
 module.exports = async (ctx) => {
-    const {bookid} = ctx.request.query
-    const comments = await mysql('comments')
+    // 评论页和图画页都通过这个接口获取数据
+    const {bookid, openid} = ctx.request.query
+    // const mysqlSelect = await mysql('comments')会将 mysqlSelect变成Promise对象
+    const mysqlSelect = mysql('comments')
         .select('comments.*', 'cSessionInfo.user_info')
         .join('cSessionInfo', 'comments.openid', 'cSessionInfo.open_id') // 第一个参数是固定语法，记住就好，后两个参数代码二者要相等
-        .where('bookid', bookid)
+    let comments
+    if (bookid) {
+        comments = await mysqlSelect.where('bookid', bookid)
+    } else {
+        comments = await mysqlSelect.where('openid', openid)
+    }
     ctx.state.data = {
         list: comments.map(v => {
             const info = JSON.parse(v.user_info)
