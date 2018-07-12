@@ -37,7 +37,7 @@ export default {
   props: ['comments', 'type'],
   methods: {
     handleClick (bookid) {
-      if(this.type === 'userComment') {
+      if (this.type === 'userComment') {
         wx.navigateTo({
           url: `/pages/detail/main?id=${bookid}`
         })

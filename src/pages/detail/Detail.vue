@@ -157,14 +157,14 @@ export default {
   },
   // page中的钩子函数
   onShareAppMessage (res) {
-      if (res.from === 'button') {
-        // 来自页面内转发按钮
-        console.log(res.target)
-      }
-      return {
-        title: '自定义转发标题'
-        // path: '/page/detail/main'
-      }
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '自定义转发标题'
+      // path: '/page/detail/main'
+    }
   },
   computed: {
     // 是否还可以添加评论，没有登录或者已经添加评论都不能评论
@@ -189,7 +189,7 @@ export default {
     // 如何获取小程序在 page onLoad 时候传递的 options
     // 在所有页面的组件内可以通过 this.$root.$mp.query 进行获取。
     // Card.vue 中在 a 标签中的跳转链接传入了参数 book.id，这里页面一渲染就获取到它
-    this.bookid = this.$root.$mp.query.id  //页面一开始就会解析访问的是哪一本图书，根据bookid
+    this.bookid = this.$root.$mp.query.id // 页面一开始就会解析访问的是哪一本图书，根据bookid
     this.getDetail()
     this.getComments() // 根据图书的id获取当前图书的评论列表
     // 从缓存中获取oprnid

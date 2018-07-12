@@ -3,10 +3,10 @@ const {mysql} = require('../qcloud')
 module.exports = async (ctx) => {
     const {id} = ctx.request.query
     const detail = await mysql('books')
-        .select('books.*', 'csessioninfo.user_info')
+        .select('books.*', 'cSessionInfo.user_info')
     // 连表查询，同时查询两个表，把cSessionInfo里面的项目加进去，
     // 前提是'books.openid', 'cSessionInfo.open_id'一样
-        .join('csessioninfo', 'books.openid', 'csessioninfo.open_id')
+        .join('cSessionInfo', 'books.openid', 'cSessionInfo.open_id')
         .where('id', id) // 取出这一个id
         .first() // 直接取出数组的第一项
     // console.log(detail)
