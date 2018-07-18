@@ -24,17 +24,18 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 配置个人信息
+server/config.js 中 mysql对象中 pass 改为自己的小程序appid
+
+# 启动服务器
+cd server/
 npm run dev
 
-# build for production with minification
-npm run build
+# 编译前端代码
+进入项目根路径中
+npm run dev
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
