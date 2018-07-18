@@ -12,8 +12,10 @@
     <div>登录</div>
   </div>
 
-  <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E5%9B%BE%E4%B9%A6%E5%88%97%E8%A1%A8.gif" width="288px" height="570px" >
-  <div>图书列表</div>
+  <div>
+    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E5%9B%BE%E4%B9%A6%E5%88%97%E8%A1%A8.gif" width="288px" height="570px" >
+    <div>图书列表</div>
+  </div>
 </div>
 
 <div display="flex">
@@ -22,8 +24,10 @@
     <div>评论</div>
   </div>
 
-  <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E6%88%91%E7%9A%84%E5%9B%BE%E4%B9%A6.gif" width="288px" height="570px" >
-  <div>我的图书</div>
+  <div>
+    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E6%88%91%E7%9A%84%E5%9B%BE%E4%B9%A6.gif" width="288px" height="570px" >
+    <div>我的图书</div>
+  </div>
 </div>
 
 ## Build Setup
