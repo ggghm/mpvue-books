@@ -6,29 +6,16 @@
 
 所有图书信息来自豆瓣图书
 ## 效果
-<div display="flex">
-  <div>
-    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E7%99%BB%E5%BD%95.gif" width="288px" height="570px" >
-    <div>登录</div>
-  </div>
+<figure class="half">
+    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E7%99%BB%E5%BD%95.gif" width="200px" height="570px">
+    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E5%9B%BE%E4%B9%A6%E5%88%97%E8%A1%A8.gif" width="200px" height="570px">
+</figure>
 
-  <div>
-    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E5%9B%BE%E4%B9%A6%E5%88%97%E8%A1%A8.gif" width="288px" height="570px" >
-    <div>图书列表</div>
-  </div>
-</div>
 
-<div display="flex">
-  <div>
-    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E8%AF%84%E8%AE%BA.gif" width="288px" height="570px" >
-    <div>评论</div>
-  </div>
-
-  <div>
-    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E6%88%91%E7%9A%84%E5%9B%BE%E4%B9%A6.gif" width="288px" height="570px" >
-    <div>我的图书</div>
-  </div>
-</div>
+<figure class="half">
+    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E8%AF%84%E8%AE%BA.gif" width="288px" height="570px">
+    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E6%88%91%E7%9A%84%E5%9B%BE%E4%B9%A6.gif" width="288px" height="570px">
+</figure>
 
 ## Build Setup
 
