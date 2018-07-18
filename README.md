@@ -7,8 +7,8 @@
 所有图书信息来自豆瓣图书
 ## 效果
 <figure class="half">
-    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E7%99%BB%E5%BD%95.gif" width="200px" height="570px">
-    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E5%9B%BE%E4%B9%A6%E5%88%97%E8%A1%A8.gif" width="200px" height="570px">
+    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E7%99%BB%E5%BD%95.gif" width="288px" height="570px">
+    <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E5%9B%BE%E4%B9%A6%E5%88%97%E8%A1%A8.gif" width="288px" height="570px">
 </figure>
 
 
