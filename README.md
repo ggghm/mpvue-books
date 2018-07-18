@@ -4,7 +4,9 @@
 
 主要功能：扫码添加图书，图书详情展示，图书浏览量排序，添加评论
 
-所有图书信息来自豆瓣图书
+主要技术栈：mpvue、Vue.js、Koa2、MySQL、Knex
+
+所有图书信息来自豆瓣图书，仅做学习用途
 ## 效果
 <figure class="half">
     <img src="https://github.com/dengtao07/mpvue-book/blob/master/gif/%E7%99%BB%E5%BD%95.gif" width="288px" height="570px">
