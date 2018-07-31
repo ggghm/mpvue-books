@@ -10,7 +10,7 @@ module.exports = async (ctx) => {
     // 请求发起后，wx.request传入的参数data都在ctx.request.body中
     const {isbn, openid, nickName} = ctx.request.body
     if (isbn && openid && nickName) {
-    // 先验证图书是否已经添加
+    // 先验证图书是否已经添加 
         const findRes = await mysql('books').select().where('isbn', isbn)
         if (findRes.length) {
             ctx.state.data = {
@@ -21,7 +21,7 @@ module.exports = async (ctx) => {
         }
         // 从豆瓣网上抓取数据并存入mysql
         let url = 'https://api.douban.com/v2/book/isbn/' + isbn
-        const bookinfo = await getJSON(url)
+        const bookinfo = await getJSON(url)  // 这里应该是koa封装了跨域请求
         const rate = bookinfo.rating.average
         const { title, image, alt, publisher, summary, price } = bookinfo
         const tags = bookinfo.tags.map(v => {
