@@ -10,7 +10,7 @@ module.exports = async (ctx) => {
     // 请求发起后，wx.request传入的参数data都在ctx.request.body中
     const {isbn, openid, nickName} = ctx.request.body
     if (isbn && openid && nickName) {
-    // 先验证图书是否已经添加 
+    // 先验证图书是否已经添加
         const findRes = await mysql('books').select().where('isbn', isbn)
         if (findRes.length) {
             ctx.state.data = {
@@ -33,7 +33,7 @@ module.exports = async (ctx) => {
             // 向 mysql 中录入获取到的图书信息
             await mysql('books').insert({
                 isbn, openid, nickName, rate, title, image, alt, publisher, summary, price, tags, author
-            })
+            }) // 这里直接把cSessionInfo中的nickName直接随书籍信息加入了，所以后序不用再连表查询了
             // 现在先理解成下面这一句就是简单向外返回参数
             ctx.state.data = {
                 title,
